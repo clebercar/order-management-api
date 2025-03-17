@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   api:
+    container_name: order_management_api
     build:
       context: .
     ports:
@@ -12,6 +13,7 @@ services:
     command: 'sh post-up.sh'
 
   postgres:
+    container_name: order_management_postgres
     image: postgres:13
     ports:
       - '5432:5432'

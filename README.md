@@ -118,6 +118,12 @@ yarn test
 
 # Generate coverage report
 yarn test:cov
+
+# Run unit tests on the docker environment
+docker exec -it order_management_api yarn test
+
+# Generate coverage report on the docker environment
+docker exec -it order_management_api yarn test:cov
 ```
 
 ## 📄 License
