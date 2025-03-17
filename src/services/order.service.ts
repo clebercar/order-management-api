@@ -61,7 +61,7 @@ export class OrderService {
     if (!order) throw new BadRequestException(`Order with ID ${id} not found`);
 
     if (updateOrderStatusDto.status === EOrderStatus.cancelled)
-      await this.updateProductStock(order, 'decrement');
+      await this.updateProductStock(order, 'increment');
 
     const orderUpdated = await this.orderRepository.update(
       id,
@@ -76,8 +76,8 @@ export class OrderService {
     action: 'decrement' | 'increment',
   ) {
     for (const { product, quantity } of order.items) {
-      if (action === 'decrement')
-        await this.productRepository.decrementStockQuantity(
+      if (action === 'increment')
+        await this.productRepository.incrementStockQuantity(
           product.id,
           quantity,
         );

@@ -192,7 +192,7 @@ describe('OrderService', () => {
       ).rejects.toThrow(BadRequestException);
     });
 
-    it('should decrement product stock quantity when order is cancelled', async () => {
+    it('should increment product stock quantity when order is cancelled', async () => {
       jest.spyOn(orderRepository, 'findById').mockResolvedValue(order);
 
       const updateOrderStatusDto: UpdateOrderStatusDto = {
@@ -208,7 +208,7 @@ describe('OrderService', () => {
 
       await orderService.updateStatus('order-1', updateOrderStatusDto);
 
-      expect(productRepository.decrementStockQuantity).toHaveBeenCalledWith(
+      expect(productRepository.incrementStockQuantity).toHaveBeenCalledWith(
         'prod-1',
         2,
       );
